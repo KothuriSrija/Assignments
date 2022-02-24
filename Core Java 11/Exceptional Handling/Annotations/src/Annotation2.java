@@ -1,0 +1,38 @@
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Method;
+
+
+@Retention(RetentionPolicy.RUNTIME) 
+@Target({ElementType.TYPE, ElementType.PARAMETER, ElementType.METHOD})  
+
+@interface Info{
+	int AuthorID();
+	String Author() default "Vyshnavi";
+	String Supervisor() default "Chaithu";
+	String Date();
+	String Time();
+	int version();
+	String description() default "Displaying Method";
+}
+
+class Devloper{
+	@Info(AuthorID = 6666, Date = "22-03-1997", Time = "12:30pm", version = 12)
+	public void displayMethod(){
+		System.out.println("Author Info");
+		} 
+}
+public class Annotation2 {
+	public static void main(String[] args)throws Exception{ 
+		Devloper devloper = new Devloper();
+		Method m=devloper.getClass().getMethod("displayMethod");
+		
+		Info d1 = m.getAnnotation(Info.class);
+		System.out.println("Author ID is: "+d1.AuthorID());
+		System.out.println("Author Name is: "+d1.Author());  
+		System.out.println("Supervisor is: "+d1.Supervisor());  
+	}
+
+}
