@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+           xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:context = "http://www.springframework.org/schema/context"
+           xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+                                       <!--      Using setter injection -->
+      <bean id="customer" class="io.address.Customer">
+          <property name="customerId" value="300"/>
+          <property name="customerName" value="Lilly"/>
+          <property name="customerContact" value="987654321"/>
+          <property name="customerAddress" ref="custAddress"/>
+
+      </bean>
+      <bean id="custAddress" class="io.address.Address">
+          <property name="street" value="KRN"/>
+          <property name="city" value="Tenali"/>
+          <property name="state" value="AP"/>
+          <property  name="country" value="India"/>
+          <property name="zip" value="522831" />
+      </bean>
+
+
+
+                                <!-- Using constructor injection -->
+    <bean id="customerCon" class = "io.address.Customer">
+        <constructor-arg  type ="int" value="302"/>
+        <constructor-arg value="Maya"/>
+        <constructor-arg value="9440060629"/>
+        <constructor-arg ref="custAddressCon"/>
+    </bean>
+    <bean id="custAddressCon" class="io.address.Address">
+        <constructor-arg value="Mama"/>
+        <constructor-arg value="Kota"/>
+        <constructor-arg value="Tenali"/>
+        <constructor-arg value="India"/>
+        <constructor-arg value="502205" />
+    </bean>
+
+    <!-- instead of adding each bean postPorcessor -->
+    <context:annotation-config/>
+</beans>
